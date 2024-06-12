@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1718136963707,
+      "tag": "0000_cool_eddie_brock",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1718196553856,
+      "tag": "0001_complete_starbolt",
+      "breakpoints": true
+    }
+  ]
+}
