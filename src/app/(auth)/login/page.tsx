@@ -5,14 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormSchema } from '@/lib/types';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormMessage,} from '@/components/ui/form';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '../../../../public/cypresslogo.svg';
@@ -55,12 +48,7 @@ const LoginPage = () => {
         className="w-full sm:justify-center sm:w-[400px] space-y-6 flex flex-col"
       >
         <Link href="/" className=" w-full flex justify-left items-center">
-          <Image
-            src={Logo}
-            alt="cypress Logo"
-            width={50}
-            height={50}
-          />
+          <Image src={Logo} alt="cypress Logo" width={50} height={50} />
           <span className="font-semibold dark:text-white text-4xl first-letter:ml-2">
             cypress.
           </span>
@@ -72,11 +60,7 @@ const LoginPage = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  {...field}
-                />
+                <Input type="email" placeholder="Email" {...field}/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -86,11 +70,7 @@ const LoginPage = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  {...field}
-                />
+                <Input type="password" placeholder="Password" {...field}/>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -102,10 +82,7 @@ const LoginPage = () => {
         </Button>
         <span className="self-container">
           Dont have an account?{' '}
-          <Link
-            href="/signup"
-            className="text-primary"
-          >
+          <Link href="/signup" className="text-primary">
             Sign Up
           </Link>
         </span>
