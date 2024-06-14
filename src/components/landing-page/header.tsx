@@ -66,29 +66,10 @@ const components: { title: string; href: string; description: string }[] = [
 const Header = () => {
   const [path, setPath] = useState('#products');
   return (
-    <header
-      className="p-4
-      flex
-      justify-center
-      items-center
-  "
-    >
-      <Link
-        href={'/'}
-        className="w-full flex gap-2
-        justify-left items-center"
-      >
-        <Image
-          src={Logo}
-          alt="Cypress Logo"
-          width={25}
-          height={25}
-        />
-        <span
-          className="font-semibold
-          dark:text-white
-        "
-        >
+    <header className="p-4 flex justify-center items-center">
+      <Link href={'/'} className="w-full flex gap-2 justify-left items-center">
+        <Image src={Logo} alt="Cypress Logo" width={25} height={25} />
+        <span className="font-semibold dark:text-white " >
           cypress.
         </span>
       </Link>
@@ -107,48 +88,19 @@ const Header = () => {
               Resources
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul
-                className="grid
-                gap-3
-                p-6
-                md:w-[400px]
-                ld:w-[500px]
-                lg:grid-cols-[.75fr_1fr]
-                "
-              >
+              <ul className="grid gap-3 p-6 md:w-[400px] ld:w-[500px] lg:grid-cols-[.75fr_1fr] ">
                 <li className="row-span-3">
-                  <span
-                    className="flex h-full w-full select-none
-                  flex-col
-                  justify-end
-                  rounded-md
-                  bg-gradient-to-b
-                  from-muted/50
-                  to-muted
-                  p-6 no-underline
-                  outline-none
-                  focus:shadow-md
-                  "
-                  >
+                  <span className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md " >
                     Welcome
                   </span>
                 </li>
-                <ListItem
-                  href="#"
-                  title="Introduction"
-                >
+                <ListItem href="#" title="Introduction" >
                   Re-usable components built using Radix UI and Tailwind CSS.
                 </ListItem>
-                <ListItem
-                  href="#"
-                  title="Installation"
-                >
+                <ListItem href="#" title="Installation" >
                   How to install dependencies and structure your app.
                 </ListItem>
-                <ListItem
-                  href="#"
-                  title="Typography"
-                >
+                <ListItem href="#" title="Typography" >
                   Styles for headings, paragraphs, lists...etc
                 </ListItem>
               </ul>
@@ -168,16 +120,10 @@ const Header = () => {
             </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4  md:grid-row-2  ">
-                <ListItem
-                  title="Pro Plan"
-                  href={'#'}
-                >
+                <ListItem title="Pro Plan" href={'#'} >
                   Unlock full power with collaboration.
                 </ListItem>
-                <ListItem
-                  title={'free Plan'}
-                  href={'#'}
-                >
+                <ListItem title={'free Plan'} href={'#'} >
                   Great for teams just starting out.
                 </ListItem>
               </ul>
@@ -185,21 +131,9 @@ const Header = () => {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuContent>
-              <ul
-                className="grid w-[400px]
-              gap-3
-              p-4
-              md:w-[500px]
-              md:grid-cols-2 
-              lg:w-[600px]
-              "
-              >
+              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]" >
                 {components.map((component) => (
-                  <ListItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
-                  >
+                  <ListItem key={component.title} title={component.title} href={component.href}>
                     {component.description}
                   </ListItem>
                 ))}
@@ -220,26 +154,14 @@ const Header = () => {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <aside
-        className="flex
-        w-full
-        gap-2
-        justify-end
-      "
-      >
+      <aside className="flex w-full gap-2 justify-end">
         <Link href={'/login'}>
-          <Button
-            variant="btn-secondary"
-            className=" p-1 hidden sm:block"
-          >
+          <Button variant="btn-secondary" className=" p-1 hidden sm:block" >
             Login
           </Button>
         </Link>
         <Link href="/signup">
-          <Button
-            variant="btn-primary"
-            className="whitespace-nowrap"
-          >
+          <Button variant="btn-primary" className="whitespace-nowrap">
             Sign Up
           </Button>
         </Link>
@@ -257,24 +179,11 @@ const ListItem = React.forwardRef<
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            'group block select-none space-y-1 font-medium leading-none'
-          )}
-          {...props}
-        >
+        <a ref={ref} className={cn(   'group block select-none space-y-1 font-medium leading-none' )} {...props}>
           <div className="text-white text-sm font-medium leading-none">
             {title}
           </div>
-          <p
-            className="group-hover:text-white/70
-            line-clamp-2
-            text-sm
-            leading-snug
-            text-white/40
-          "
-          >
+          <p className="group-hover:text-white/70 line-clamp-2 text-sm leading-snug text-white/40   ">
             {children}
           </p>
         </a>

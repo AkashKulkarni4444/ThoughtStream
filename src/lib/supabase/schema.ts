@@ -1,6 +1,6 @@
 import { boolean, integer, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { prices, subscriptionStatus } from "../../../migrations/schema";
 import { sql } from "drizzle-orm";
+import { prices, subscriptionStatus } from "../../../migrations/schema";
 
 export const workspaces = pgTable("workspaces", {
   id: uuid("id").defaultRandom().primaryKey().notNull(),
