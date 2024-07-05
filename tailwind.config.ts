@@ -52,6 +52,7 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'custom-gray': '#4A5568',
         'washed-blue-50': '#f0f3ff',
         'washed-blue-100': '#d0daff',
         'washed-blue-200': '#bac9ff',
@@ -130,9 +131,10 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      scrollbar:['rounded'],
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require('tailwind-scrollbar'),require("tailwindcss-animate")],
 } satisfies Config
 
 export default config

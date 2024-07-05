@@ -53,7 +53,6 @@ const DashboardSetup: React.FC<DashboardSetupProps> = ({
     const file = value.logo?.[0];
     let filePath = null;
     const workspaceUUID = v4();
-    console.log(file);
 
     if (file) {
       try {
@@ -147,7 +146,7 @@ const DashboardSetup: React.FC<DashboardSetupProps> = ({
                 Workspace Logo
               </Label>
               <Input id="logo" type="file" accept="image/*" placeholder="Workspace Name"
-                // disabled={isLoading || subscription?.status !== 'active'}
+                disabled={isLoading || subscription?.status !== 'active'}
                 {...register("logo", {
                   required: false,
                 })}

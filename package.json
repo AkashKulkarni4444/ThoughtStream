@@ -16,7 +16,7 @@
     "migrate": "bun run src/lib/supabase/migration.ts"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.6.0",
+    "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -34,12 +34,11 @@
     "@stripe/stripe-js": "^2.1.10",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.43.4",
-    "bufferutil": "^4.0.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.6",
-    "emoji-picker-react": "^4.10.0",
+    "emoji-picker-react": "^4.5.3",
     "lucide-react": "^0.287.0",
     "next": "13.5.5",
     "next-themes": "^0.2.1",
@@ -48,15 +47,16 @@
     "quill-cursors": "^4.0.2",
     "react": "^18",
     "react-dom": "^18",
-    "react-hook-form": "^7.51.5",
+    "react-hook-form": "^7.47.0",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
     "stripe": "^14.1.0",
     "tailwind-merge": "^1.14.0",
+    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
     "utf-8-validate": "^5.0.10",
     "uuid": "^9.0.1",
-    "zod": "^3.23.8"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

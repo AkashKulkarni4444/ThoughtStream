@@ -15,6 +15,13 @@
       "when": 1718347899636,
       "tag": "0001_secret_ink",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1718425731631,
+      "tag": "0002_gorgeous_iron_patriot",
+      "breakpoints": true
     }
   ]
 }
