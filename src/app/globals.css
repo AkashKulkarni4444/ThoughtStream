@@ -29,6 +29,9 @@ body {
     --input: 220 13% 91%;
     --ring: 262.1 83.3% 57.8%;
     --radius: 0.5rem;
+    --scrollbar-track-color: #d4d0d0;
+    --scrollbar-thumb-color: #888;
+    --scrollbar-thumb-hover-color: #555;
   }
 
   .dark {
@@ -51,6 +54,9 @@ body {
     --border: 247, 18.3%, 18.2%;
     --input: 215 27.9% 16.9%;
     --ring: 263.4 70% 50.4%;
+    --scrollbar-track-color: #463687;
+    --scrollbar-thumb-color: #702891;
+    --scrollbar-thumb-hover-color: #9b0bb4;
   }
 }
 
@@ -105,10 +111,10 @@ body {
   @apply border-none outline-none;
 }
 
-/* .dotPattern {
+.dotPattern {
   background-image: radial-gradient(rgb(25, 25, 25) 1px, transparent 1px);
   background-size: 30px 30px;
-} */
+}
 
 .ql-toolbar::-webkit-scrollbar {
   display: none;
@@ -132,7 +138,8 @@ ul {
   @apply dark:text-washed-purple-700;
 }
 
-/* styles/global.css */
+
+/* Apply the scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px; /* Width of the scrollbar */
   height: 8px; /* Height of the scrollbar */
@@ -140,19 +147,19 @@ ul {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the track */
-  border-radius: 10px; /* Rounded corners */
+  background: var(--scrollbar-track-color); /* Color of the track */
+  border-radius: 8px; /* Rounded corners */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar handle */
-  border-radius: 10px; /* Rounded corners */
+  background: var(--scrollbar-thumb-color); /* Color of the scrollbar handle */
+  border-radius: 8px; /* Rounded corners */
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Darker color on hover */
+  background: var(--scrollbar-thumb-hover-color); /* Darker color on hover */
 }
 
 /* Remove arrows (for IE, Edge) */

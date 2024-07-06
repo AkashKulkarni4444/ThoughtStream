@@ -6,46 +6,14 @@ import { User, workspace } from '@/lib/supabase/supabase.types';
 import { useSupabaseUser } from '@/lib/providers/supabase-user-provider';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import {
-  Briefcase,
-  CreditCard,
-  ExternalLink,
-  Lock,
-  LogOut,
-  Plus,
-  Share,
-  User as UserIcon,
-} from 'lucide-react';
+import { Briefcase, CreditCard, ExternalLink, Lock, LogOut, Plus, Share, User as UserIcon, } from 'lucide-react';
 import { Separator } from '../ui/separator';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import {
-  addCollaborators,
-  deleteWorkspace,
-  getCollaborators,
-  removeCollaborators,
-  updateWorkspace,
-} from '@/lib/supabase/queries';
+import { addCollaborators, deleteWorkspace, getCollaborators, removeCollaborators, updateWorkspace } from '@/lib/supabase/queries';
 import { v4 } from 'uuid';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 
 import CollaboratorSearch from '../global/collaborator-search';
 import { Button } from '../ui/button';
@@ -196,32 +164,14 @@ const SettingsForm = () => {
       </p>
       <Separator />
       <div className="flex flex-col gap-2">
-        <Label
-          htmlFor="workspaceName"
-          className="text-sm text-muted-foreground"
-        >
+        <Label htmlFor="workspaceName" className="text-sm text-muted-foreground" >
           Name
         </Label>
-        <Input
-          name="workspaceName"
-          value={workspaceDetails ? workspaceDetails.title : ''}
-          placeholder="Workspace Name"
-          onChange={workspaceNameChange}
-        />
-        <Label
-          htmlFor="workspaceLogo"
-          className="text-sm text-muted-foreground"
-        >
+        <Input name="workspaceName" value={workspaceDetails ? workspaceDetails.title : ''} placeholder="Workspace Name" onChange={workspaceNameChange} />
+        <Label htmlFor="workspaceLogo" className="text-sm text-muted-foreground" >
           Workspace Logo
         </Label>
-        <Input
-          name="workspaceLogo"
-          type="file"
-          accept="image/*"
-          placeholder="Workspace Logo"
-          onChange={onChangeWorkspaceLogo}
-          disabled={uploadingLogo || subscription?.status !== 'active'}
-        />
+        <Input name="workspaceLogo" type="file" accept="image/*" placeholder="Workspace Logo" onChange={onChangeWorkspaceLogo} disabled={uploadingLogo || subscription?.status !== 'active'} />
         {subscription?.status !== 'active' && (
           <small className="text-muted-foreground">
             To customize your workspace, you need to be on a Pro Plan
@@ -230,30 +180,19 @@ const SettingsForm = () => {
       </div>
       <>
         <Label htmlFor="permissions">Permissions</Label>
-        <Select
-          onValueChange={onPermissionsChange}
-          value={permissions}
-        >
+        <Select onValueChange={onPermissionsChange} value={permissions} >
           <SelectTrigger className="w-full h-26 -mt-3">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectItem value="private">
-                <div
-                  className="p-2
-                  flex
-                  gap-4
-                  justify-center
-                  items-center
-                "
-                >
+                <div className="p-2 flex gap-4 justify-center items-center ">
                   <Lock />
                   <article className="text-left flex flex-col">
                     <span>Private</span>
                     <p>
-                      Your workspace is private to you. You can choose to share
-                      it later.
+                      Your workspace is private to you. You can choose to share it later.
                     </p>
                   </article>
                 </div>
@@ -273,16 +212,8 @@ const SettingsForm = () => {
 
         {permissions === 'shared' && (
           <div>
-            <CollaboratorSearch
-              existingCollaborators={collaborators}
-              getCollaborator={(user) => {
-                addCollaborator(user);
-              }}
-            >
-              <Button
-                type="button"
-                className="text-sm mt-4"
-              >
+            <CollaboratorSearch existingCollaborators={collaborators} getCollaborator={(user) => { addCollaborator(user); }} >
+              <Button type="button" className="text-sm mt-4" >
                 <Plus />
                 Add Collaborators
               </Button>
@@ -291,61 +222,26 @@ const SettingsForm = () => {
               <span className="text-sm text-muted-foreground">
                 Collaborators {collaborators.length || ''}
               </span>
-              <ScrollArea
-                className="
-            h-[120px]
-            overflow-y-scroll
-            w-full
-            rounded-md
-            border
-            border-muted-foreground/20"
-              >
+              <ScrollArea className=" h-[120px] overflow-y-scroll w-full rounded-md border border-muted-foreground/20">
                 {collaborators.length ? (
                   collaborators.map((c) => (
-                    <div
-                      className="p-4 flex
-                      justify-between
-                      items-center
-                "
-                      key={c.id}
-                    >
+                    <div className="p-4 flex justify-between items-center" key={c.id}>
                       <div className="flex gap-4 items-center">
                         <Avatar>
                           <AvatarImage src="/avatars/7.png" />
                           <AvatarFallback>PJ</AvatarFallback>
                         </Avatar>
-                        <div
-                          className="text-sm 
-                          gap-2
-                          text-muted-foreground
-                          overflow-hidden
-                          overflow-ellipsis
-                          sm:w-[300px]
-                          w-[140px]
-                        "
-                        >
+                        <div className="text-sm  gap-2 text-muted-foreground overflow-hidden overflow-ellipsis sm:w-[300px] w-[140px] " >
                           {c.email}
                         </div>
                       </div>
-                      <Button
-                        variant="secondary"
-                        onClick={() => removeCollaborator(c)}
-                      >
+                      <Button variant="secondary" onClick={() => removeCollaborator(c)} >
                         Remove
                       </Button>
                     </div>
                   ))
                 ) : (
-                  <div
-                    className="absolute
-                  right-0 left-0
-                  top-0
-                  bottom-0
-                  flex
-                  justify-center
-                  items-center
-                "
-                  >
+                  <div className="absolute right-0 left-0 top-0 bottom-0 flex justify-center items-center">
                     <span className="text-muted-foreground text-sm">
                       You have no collaborators
                     </span>
@@ -360,15 +256,7 @@ const SettingsForm = () => {
             Warning! deleting you workspace will permanantly delete all data
             related to this workspace.
           </AlertDescription>
-          <Button
-            type="submit"
-            size={'sm'}
-            variant={'destructive'}
-            className="mt-4 
-            text-sm
-            bg-destructive/40 
-            border-2 
-            border-destructive"
+          <Button type="submit" size={'sm'} variant={'destructive'} className="mt-4 text-sm bg-destructive/40 border-2 border-destructive"
             onClick={async () => {
               if (!workspaceId) return;
               await deleteWorkspace(workspaceId);
@@ -395,19 +283,11 @@ const SettingsForm = () => {
             <small className="text-muted-foreground cursor-not-allowed">
               {user ? user.email : ''}
             </small>
-            <Label
-              htmlFor="profilePicture"
-              className="text-sm text-muted-foreground"
-            >
+            <Label htmlFor="profilePicture" className="text-sm text-muted-foreground" >
               Profile Picture
             </Label>
-            <Input
-              name="profilePicture"
-              type="file"
-              accept="image/*"
-              placeholder="Profile Picture"
+            <Input name="profilePicture" type="file" accept="image/*" placeholder="Profile Picture" disabled={uploadingProfilePic}
               // onChange={onChangeProfilePicture}
-              disabled={uploadingProfilePic}
             />
           </div>
         </div>
@@ -424,35 +304,18 @@ const SettingsForm = () => {
           You are currently on a{' '}
           {subscription?.status === 'active' ? 'Pro' : 'Free'} Plan
         </p>
-        <Link
-          href="/"
-          target="_blank"
-          className="text-muted-foreground flex flex-row items-center gap-2"
-        >
+        <Link href="/" target="_blank" className="text-muted-foreground flex flex-row items-center gap-2" >
           View Plans <ExternalLink size={16} />
         </Link>
         {subscription?.status === 'active' ? (
           <div>
-            <Button
-              type="button"
-              size="sm"
-              variant={'secondary'}
-              disabled={loadingPortal}
-              className="text-sm"
-              onClick={redirectToCustomerPortal}
-            >
+            <Button type="button" size="sm" variant={'secondary'} disabled={loadingPortal} className="text-sm" onClick={redirectToCustomerPortal} >
               Manage Subscription
             </Button>
           </div>
         ) : (
           <div>
-            <Button
-              type="button"
-              size="sm"
-              variant={'secondary'}
-              className="text-sm"
-              onClick={() => setOpen(true)}
-            >
+            <Button type="button" size="sm" variant={'secondary'} className="text-sm" onClick={() => setOpen(true)} >
               Start Plan
             </Button>
           </div>

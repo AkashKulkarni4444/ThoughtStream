@@ -27,15 +27,7 @@ interface DropdownProps {
   disabled?: boolean;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
-  title,
-  id,
-  listType,
-  iconId,
-  children,
-  disabled,
-  ...props
-}) => {
+const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, children, disabled, ...props }) => {
   const supabase = createClientComponentClient();
   const { toast } = useToast();
   const { user } = useSupabaseUser();
@@ -55,7 +47,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   }, [state, listType, workspaceId, id, title]);
 
   //fileItitle
-
   const fileTitle: string | undefined = useMemo(() => {
     if (listType === 'file') {
       const fileAndFolderId = id.split('folder');
@@ -86,35 +77,28 @@ const Dropdown: React.FC<DropdownProps> = ({
   const handleDoubleClick = () => {
     setIsEditing(true);
   };
-  //blur
 
+  //blur
   const handleBlur = async () => {
     if (!isEditing) return;
     setIsEditing(false);
     const fId = id.split('folder');
+
+    // check if folder
     if (fId?.length === 1) {
       if (!folderTitle) return;
-      toast({
-        title: 'Success',
-        description: 'Folder title changed.',
-      });
+      toast({title: 'Success',description: 'Folder title changed.',});
       await updateFolder({ title }, fId[0]);
     }
 
+    // check if file
     if (fId.length === 2 && fId[1]) {
       if (!fileTitle) return;
       const { data, error } = await updateFile({ title: fileTitle }, fId[1]);
       if (error) {
-        toast({
-          title: 'Error',
-          variant: 'destructive',
-          description: 'Could not update the title for this file',
-        });
+        toast({title: 'Error',variant: 'destructive',description: 'Could not update the title for this file',});
       } else
-        toast({
-          title: 'Success',
-          description: 'File title changed.',
-        });
+        toast({title: 'Success',description: 'File title changed.',});
     }
   };
 
@@ -124,24 +108,13 @@ const Dropdown: React.FC<DropdownProps> = ({
     if (listType === 'folder') {
       dispatch({
         type: 'UPDATE_FOLDER',
-        payload: {
-          workspaceId,
-          folderId: id,
-          folder: { iconId: selectedEmoji },
-        },
+        payload: { workspaceId, folderId: id, folder: { iconId: selectedEmoji },},
       });
       const { data, error } = await updateFolder({ iconId: selectedEmoji }, id);
       if (error) {
-        toast({
-          title: 'Error',
-          variant: 'destructive',
-          description: 'Could not update the emoji for this folder',
-        });
+        toast({title: 'Error',variant: 'destructive',description: 'Could not update the emoji for this folder',});
       } else {
-        toast({
-          title: 'Success',
-          description: 'Update emoji for the folder',
-        });
+        toast({title: 'Success',description: 'Update emoji for the folder',});
       }
     }
   };
@@ -183,26 +156,16 @@ const Dropdown: React.FC<DropdownProps> = ({
       dispatch({
         type: 'UPDATE_FOLDER',
         payload: {
-          folder: { inTrash: `Deleted by ${user?.email}` },
-          folderId: pathId[0],
-          workspaceId,
+        folder: { inTrash: `Deleted by ${user?.email}` },
+        folderId: pathId[0],
+        workspaceId,
         },
       });
-      const { data, error } = await updateFolder(
-        { inTrash: `Deleted by ${user?.email}` },
-        pathId[0]
-      );
+      const { data, error } = await updateFolder({ inTrash: `Deleted by ${user?.email}` }, pathId[0] );
       if (error) {
-        toast({
-          title: 'Error',
-          variant: 'destructive',
-          description: 'Could not move the folder to trash',
-        });
+        toast({title: 'Error',variant: 'destructive',description: 'Could not move the folder to trash',});
       } else {
-        toast({
-          title: 'Success',
-          description: 'Moved folder to trash',
-        });
+        toast({title: 'Success',description: 'Moved folder to trash',});
       }
     }
 
@@ -221,16 +184,9 @@ const Dropdown: React.FC<DropdownProps> = ({
         pathId[1]
       );
       if (error) {
-        toast({
-          title: 'Error',
-          variant: 'destructive',
-          description: 'Could not move the folder to trash',
-        });
+        toast({title:'Error',variant:'destructive',description:'Could not move the folder to trash', });
       } else {
-        toast({
-          title: 'Success',
-          description: 'Moved folder to trash',
-        });
+        toast({title: 'Success',description: 'Moved folder to trash',});
       }
     }
   };
@@ -243,7 +199,6 @@ const Dropdown: React.FC<DropdownProps> = ({
       'group/file': !isFolder,
     }
   );
-
   const listStyles = useMemo(
     () =>
       clsx('relative', {
@@ -252,7 +207,6 @@ const Dropdown: React.FC<DropdownProps> = ({
       }),
     [isFolder]
   );
-
   const hoverStyles = useMemo(
     () =>
       clsx(
@@ -298,30 +252,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <AccordionItem
-      value={id}
-      className={listStyles}
-      onClick={(e) => {
-        e.stopPropagation();
+    <AccordionItem value={id} className={listStyles} 
+      onClick={(e) => { 
+        e.stopPropagation(); 
         navigatatePage(id, listType);
-      }}
-    >
-      <AccordionTrigger
-        id={listType}
-        className="hover:no-underline 
-        p-2 
-        dark:text-muted-foreground 
-        text-sm"
-        disabled={listType === 'file'}
-      >
+      }} >
+      <AccordionTrigger id={listType} className="hover:no-underline p-2 dark:text-muted-foreground text-sm" disabled={listType === 'file'} >
         <div className={groupIdentifies}>
-          <div
-            className="flex 
-          gap-4 
-          items-center 
-          justify-center 
-          overflow-hidden"
-          >
+          <div className="flex gap-4 items-center justify-center overflow-hidden">
             <div className="relative">
               <EmojiPicker getValue={onChangeEmoji}>{iconId}</EmojiPicker>
             </div>
@@ -335,29 +273,15 @@ const Dropdown: React.FC<DropdownProps> = ({
                   'bg-transparent cursor-pointer': !isEditing,
                 }
               )}
-              readOnly={!isEditing}
-              onDoubleClick={handleDoubleClick}
-              onBlur={handleBlur}
-              onChange={
-                listType === 'folder' ? folderTitleChange : fileTitleChange
-              }
-            />
+              readOnly={!isEditing} onDoubleClick={handleDoubleClick} onBlur={handleBlur} onChange={listType === 'folder' ? folderTitleChange : fileTitleChange}/>
           </div>
           <div className={hoverStyles}>
             <TooltipComponent message="Delete Folder">
-              <Trash
-                onClick={moveToTrash}
-                size={15}
-                className="hover:dark:text-white dark:text-Neutrals/neutrals-7 transition-colors"
-              />
+              <Trash onClick={moveToTrash} size={15} className="hover:dark:text-white dark:text-Neutrals/neutrals-7 transition-colors" />
             </TooltipComponent>
             {listType === 'folder' && !isEditing && (
               <TooltipComponent message="Add File">
-                <PlusIcon
-                  onClick={addNewFile}
-                  size={15}
-                  className="hover:dark:text-white dark:text-Neutrals/neutrals-7 transition-colors"
-                />
+                <PlusIcon onClick={addNewFile} size={15} className="hover:dark:text-white dark:text-Neutrals/neutrals-7 transition-colors"/>
               </TooltipComponent>
             )}
           </div>
@@ -371,13 +295,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           .map((file) => {
             const customFileId = `${id}folder${file.id}`;
             return (
-              <Dropdown
-                key={file.id}
-                title={file.title}
-                listType="file"
-                id={customFileId}
-                iconId={file.iconId}
-              />
+              <Dropdown key={file.id} title={file.title} listType="file" id={customFileId} iconId={file.iconId} />
             );
           })}
       </AccordionContent>
