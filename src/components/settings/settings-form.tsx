@@ -42,8 +42,7 @@ const SettingsForm = () => {
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [loadingPortal, setLoadingPortal] = useState(false);
 
-  //WIP PAYMENT PORTAL
-
+  //PAYMENT PORTAL
   const redirectToCustomerPortal = async () => {
     setLoadingPortal(true);
     try {
@@ -57,6 +56,7 @@ const SettingsForm = () => {
     }
     setLoadingPortal(false);
   };
+  
   //addcollborators
   const addCollaborator = async (profile: User) => {
     if (!workspaceId) return;
@@ -90,7 +90,7 @@ const SettingsForm = () => {
     });
     if (titleTimerRef.current) clearTimeout(titleTimerRef.current);
     titleTimerRef.current = setTimeout(async () => {
-      // await updateWorkspace({ title: e.target.value }, workspaceId);
+      await updateWorkspace({ title: e.target.value }, workspaceId);
     }, 500);
   };
 
@@ -135,7 +135,7 @@ const SettingsForm = () => {
   };
 
   //CHALLENGE fetching avatar details
-  //WIP Payment Portal redirect
+  //Payment Portal redirect
 
   useEffect(() => {
     const showingWorkspace = state.workspaces.find(

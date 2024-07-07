@@ -50,12 +50,7 @@ const Sidebar: React.FC<SidebarProps> = async ({ params, className }) => {
 
   //get all the different workspaces private collaborating shared
   return (
-    <aside
-      className={twMerge(
-        'hidden sm:flex sm:flex-col w-[280px] shrink-0 p-4 md:gap-4 !justify-between',
-        className
-      )}
-    >
+    <aside className={twMerge('hidden sm:flex sm:flex-col w-[320px] shrink-0 p-4 md:gap-4 !justify-between',className)}>
       <div>
         <WorkspaceDropdown
           privateWorkspaces={privateWorkspaces}
