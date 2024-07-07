@@ -127,56 +127,55 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ dirDetails, dirType, fileId})
     return `${workspaceBreadCrumb} ${folderBreadCrumb} ${fileBreadCrumb}`;
   }, [state, pathname, workspaceId]);
 
-  //
-  const wrapperRef = useCallback(async (wrapper: any) => {
-    if (typeof window !== 'undefined') {
-      if (wrapper === null) return;
-      wrapper.innerHTML = '';
-      const editor = document.createElement('div');
-      wrapper.append(editor);
-      const Quill = (await import('quill')).default;
-      const QuillCursors = (await import('quill-cursors')).default;
-      Quill.register('modules/cursors', QuillCursors);
-      const q = new Quill(editor, {
-        theme: 'snow',
-        modules: {
-          toolbar: TOOLBAR_OPTIONS,
-          cursors: {
-            transformOnTextChange: true,
-          },
-        },
-      });
-      setQuill(q);
-    }
-  }, []);
-
-  // const wrapperRef = useCallback((wrapper: HTMLDivElement | null): void => {
-  //   const initQuill = async () => {
-  //     if (typeof window !== 'undefined') {
-  //       if (wrapper === null) return;
-  //       wrapper.innerHTML = '';
-  //       const editor = document.createElement('div');
-  //       wrapper.append(editor);
-  //       const Quill = (await import('quill')).default;
-  //       const QuillCursors = (await import('quill-cursors')).default;
-  //       Quill.register('modules/cursors', QuillCursors);
-  //       const q = new Quill(editor, {
-  //         theme: 'snow',
-  //         modules: {
-  //           toolbar: TOOLBAR_OPTIONS,
-  //           cursors: {
-  //             transformOnTextChange: true,
-  //           },
+  // const wrapperRef = useCallback(async (wrapper: any) => {
+  //   if (typeof window !== 'undefined') {
+  //     if (wrapper === null) return;
+  //     wrapper.innerHTML = '';
+  //     const editor = document.createElement('div');
+  //     wrapper.append(editor);
+  //     const Quill = (await import('quill')).default;
+  //     const QuillCursors = (await import('quill-cursors')).default;
+  //     Quill.register('modules/cursors', QuillCursors);
+  //     const q = new Quill(editor, {
+  //       theme: 'snow',
+  //       modules: {
+  //         toolbar: TOOLBAR_OPTIONS,
+  //         cursors: {
+  //           transformOnTextChange: true,
   //         },
-  //       });
-  //       setQuill(q);
-  //     }
-  //   };
-  
-  //   if (wrapper) {
-  //     initQuill();
+  //       },
+  //     });
+  //     setQuill(q);
   //   }
   // }, []);
+
+  const wrapperRef = useCallback((wrapper: HTMLDivElement | null): void => {
+    const initQuill = async () => {
+      if (typeof window !== 'undefined') {
+        if (wrapper === null) return;
+        wrapper.innerHTML = '';
+        const editor = document.createElement('div');
+        wrapper.append(editor);
+        const Quill = (await import('quill')).default;
+        const QuillCursors = (await import('quill-cursors')).default;
+        Quill.register('modules/cursors', QuillCursors);
+        const q = new Quill(editor, {
+          theme: 'snow',
+          modules: {
+            toolbar: TOOLBAR_OPTIONS,
+            cursors: {
+              transformOnTextChange: true,
+            },
+          },
+        });
+        setQuill(q);
+      }
+    };
+  
+    if (wrapper) {
+      initQuill();
+    }
+  }, []);
 
   const restoreFileHandler = async () => {
     if (dirType === 'file') {
@@ -396,43 +395,43 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ dirDetails, dirType, fileId})
       const contents = quill.getContents();
       const quillLength = quill.getLength();
       saveTimerRef.current = setTimeout(async () => {
-        // if (contents && quillLength !== 1 && fileId) {
-        //   if (dirType == 'workspace') {
-        //     dispatch({
-        //       type: 'UPDATE_WORKSPACE',
-        //       payload: {
-        //         workspace: { data: JSON.stringify(contents) },
-        //         workspaceId: fileId,
-        //       },
-        //     });
-        //     await updateWorkspace({ data: JSON.stringify(contents) }, fileId);
-        //   }
-        //   if (dirType == 'folder') {
-        //     if (!workspaceId) return;
-        //     dispatch({
-        //       type: 'UPDATE_FOLDER',
-        //       payload: {
-        //         folder: { data: JSON.stringify(contents) },
-        //         workspaceId,
-        //         folderId: fileId,
-        //       },
-        //     });
-        //     await updateFolder({ data: JSON.stringify(contents) }, fileId);
-        //   }
-        //   if (dirType == 'file') {
-        //     if (!workspaceId || !folderId) return;
-        //     dispatch({
-        //       type: 'UPDATE_FILE',
-        //       payload: {
-        //         file: { data: JSON.stringify(contents) },
-        //         workspaceId,
-        //         folderId: folderId,
-        //         fileId,
-        //       },
-        //     });
-        //     await updateFile({ data: JSON.stringify(contents) }, fileId);
-        //   }
-        // }
+        if (contents && quillLength !== 1 && fileId) {
+          if (dirType == 'workspace') {
+            dispatch({
+              type: 'UPDATE_WORKSPACE',
+              payload: {
+                workspace: { data: JSON.stringify(contents) },
+                workspaceId: fileId,
+              },
+            });
+            await updateWorkspace({ data: JSON.stringify(contents) }, fileId);
+          }
+          if (dirType == 'folder') {
+            if (!workspaceId) return;
+            dispatch({
+              type: 'UPDATE_FOLDER',
+              payload: {
+                folder: { data: JSON.stringify(contents) },
+                workspaceId,
+                folderId: fileId,
+              },
+            });
+            await updateFolder({ data: JSON.stringify(contents) }, fileId);
+          }
+          if (dirType == 'file') {
+            if (!workspaceId || !folderId) return;
+            dispatch({
+              type: 'UPDATE_FILE',
+              payload: {
+                file: { data: JSON.stringify(contents) },
+                workspaceId,
+                folderId: folderId,
+                fileId,
+              },
+            });
+            await updateFile({ data: JSON.stringify(contents) }, fileId);
+          }
+        }
         setSaving(false);
       }, 850);
       socket.emit('send-changes', delta, fileId);

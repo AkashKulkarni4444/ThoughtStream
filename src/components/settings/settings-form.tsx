@@ -134,9 +134,6 @@ const SettingsForm = () => {
     } else setPermissions(val);
   };
 
-  //CHALLENGE fetching avatar details
-  //Payment Portal redirect
-
   useEffect(() => {
     const showingWorkspace = state.workspaces.find(
       (workspace) => workspace.id === workspaceId
