@@ -68,9 +68,9 @@ const Header = () => {
   return (
     <header className="p-4 flex justify-center items-center">
       <Link href={'/'} className="w-full flex gap-2 justify-left items-center">
-        <Image src={Logo} alt="Cypress Logo" width={25} height={25} />
+        <Image src={Logo} alt="Thought-Stream Logo" width={25} height={25} />
         <span className="font-semibold dark:text-white " >
-          cypress.
+          Thought-Stream.
         </span>
       </Link>
       <NavigationMenu className="hidden md:block">

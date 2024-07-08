@@ -1,13 +1,6 @@
 'use client';
 import { useToast } from '@/components/ui/use-toast';
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import {Dispatch,SetStateAction,createContext,useContext,useEffect,useState,} from 'react';
 import { useSupabaseUser } from './supabase-user-provider';
 import { getUserSubscriptionStatus } from '../supabase/queries';
 import SubscriptionModal from '@/components/global/subscription-modal';

@@ -91,9 +91,9 @@ const Signup = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="w-full sm:justify-center sm:w-[400px] space-y-6 flex flex-col">
         <Link href="/" className=" w-full flex justify-left items-center" >
-          <Image src={Logo} alt="cypress Logo" width={50} height={50} />
+          <Image src={Logo} alt="Thought-Stream Logo" width={50} height={50} />
           <span className="font-semibold dark:text-white text-4xl first-letter:ml-2">
-            cypress.
+            Thought-Stream.
           </span>
         </Link>
         <FormDescription

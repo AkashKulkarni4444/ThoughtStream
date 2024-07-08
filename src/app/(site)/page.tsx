@@ -21,12 +21,12 @@ const HomePage = () => {
           pill="✨ Your Workspace, Perfected"
           title="All-In-One Collaboration and Productivity Platform"
         />
-        <div className="bg-white p-[2px] my-[6] rounded-xl bg-gradient-to-r from-primary to-brand-primaryBlue sm:w-[300px]">
+        <div className="bg-white p-[2px] my-[6] rounded-xl bg-gradient-to-r from-primary to-brand-primaryBlue sm:w-[320px]">
           <Button
             variant="secondary"
             className="w-full rounded-[10px] p-6 text-2xl bg-background"
           >
-            Get Cypress Free
+            Get Thought-Stream Free
           </Button>
         </div>
         <div className="md:mt-[-90px] sm:w-full w-[750px] flex justify-center items-center mt-[-40px] relative sm:ml-0 ml-[-50px]">
@@ -153,7 +153,7 @@ const HomePage = () => {
               }
               cardContent={
                 <CardContent className="p-0">
-                  <span className="font-normal  text-2xl">${card.price}</span>
+                  <span className="font-normal  text-2xl">₹{card.price}</span>
                   {+card.price > 0 ? (
                     <span className="dark:text-washed-purple-800 ml-1">
                       /mo
