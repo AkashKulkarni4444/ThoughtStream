@@ -532,7 +532,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ dirDetails, dirType, fileId})
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Avatar className="-ml-3 bg-background border-2 flex items-center justify-center border-white h-8 w-8 rounded-full"  >
-                        <AvatarImage src={collaborator.avatarUrl ? collaborator.avatarUrl : ''} className="rounded-full" />
+                        <AvatarImage src={collaborator.avatarUrl ? collaborator.avatarUrl : "/avatars/7.png"} className="rounded-full" />
                         <AvatarFallback>
                           {collaborator.email.substring(0, 2).toUpperCase()}
                         </AvatarFallback>

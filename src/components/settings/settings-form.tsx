@@ -10,7 +10,7 @@ import { Briefcase, CreditCard, ExternalLink, Lock, LogOut, Plus, Share, User as
 import { Separator } from "../ui/separator";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { addCollaborators, deleteWorkspace, getCollaborators, removeCollaborators, updateUser, updateWorkspace, } from "@/lib/supabase/queries";
+import { addCollaborators, deleteWorkspace, findUser, getCollaborators, removeCollaborators, updateUser, updateWorkspace, } from "@/lib/supabase/queries";
 import { v4 } from "uuid";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from "@/components/ui/alert-dialog";
@@ -40,7 +40,7 @@ const SettingsForm = () => {
   const [uploadingProfilePic, setUploadingProfilePic] = useState(false);
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [loadingPortal, setLoadingPortal] = useState(false);
-
+  const [userInfo, setUserInfo] = useState<User>();
   //PAYMENT PORTAL
   const redirectToCustomerPortal = async () => {
     setLoadingPortal(true);
@@ -175,6 +175,14 @@ const SettingsForm = () => {
     fetchCollaborators();
   }, [workspaceId]);
 
+  useEffect(() => {
+    const getData = async ()=>{
+      const userInfo = await findUser(user!.id);
+      setUserInfo(userInfo);
+    }
+    getData();
+  }, [user])
+  
   return (
     <div className="flex gap-4 flex-col">
       <p className="flex items-center gap-2 mt-6">
@@ -247,7 +255,7 @@ const SettingsForm = () => {
                     <div className="p-4 flex justify-between items-center" key={c.id} >
                       <div className="flex gap-4 items-center">
                         <Avatar>
-                          <AvatarImage src="/avatars/7.png" />
+                          <AvatarImage src={c.avatarUrl?c.avatarUrl:"/avatars/7.png"}/>
                           <AvatarFallback>PJ</AvatarFallback>
                         </Avatar>
                         <div className="text-sm  gap-2 text-muted-foreground overflow-hidden overflow-ellipsis sm:w-[300px] w-[140px] ">
@@ -292,7 +300,7 @@ const SettingsForm = () => {
         <Separator />
         <div className="flex items-center">
           <Avatar>
-            <AvatarImage src={""} />
+            <AvatarImage src={userInfo?.avatarUrl?userInfo.avatarUrl:"/avatars/7.png"} />
             <AvatarFallback>
               <CypressProfileIcon />
             </AvatarFallback>
