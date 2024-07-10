@@ -1,0 +1,47 @@
+name: Deploy thought-stream application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" >> .env
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{NEXT_PUBLIC_SUPABASE_ANON_KEY}}">> .env
+          echo "SERVICE_ROLE_KEY=${{SERVICE_ROLE_KEY}}">> .env
+          echo "PW=${{PW}}">> .env
+          echo "NEXT_PUBLIC_SITE_URL=${{NEXT_PUBLIC_SITE_URL}}">> .env
+          echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}">> .env
+          echo "STRIPE_SECRET_KEY=${{STRIPE_SECRET_KEY}}">> .env
+          echo "STRIPE_WEBHOOK_SECRET=${{STRIPE_WEBHOOK_SECRET}}">> .env
+          echo "THOUGHT_STREAM_DB_PWD=${{THOUGHT_STREAM_DB_PWD}}">> .env
+      - name: Build docker image
+        run: docker build -t akashkulkarni4444/thought-stream .
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Publish image to docker hub
+        run: docker push akashkulkarni4444/thought-stream:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull akashkulkarni4444/thought-stream:latest
+      - name: Delete old container if it exists
+        run: |
+          if [ $(docker ps -a -q -f name=thought-stream-container) ]; then
+            docker rm -f thought-stream-container
+          else
+            echo "Container 'thought-stream-container' does not exist."
+          fi
+      - name: Run docker container
+        run: docker run -d -p 3000:3000 --name thought-stream-container akashkulkarni4444/thought-stream 

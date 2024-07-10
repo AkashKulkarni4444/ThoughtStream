@@ -1,9 +1,8 @@
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import db from "@/lib/supabase/db";
 import { ThemeProvider } from "@/lib/providers/next-theme-provider";
 import { DM_Sans } from "next/font/google";
 import { twMerge } from "tailwind-merge";
@@ -16,7 +15,8 @@ const inter = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Thought-Stream",
-  description: "A web app to collaborate online and build fantastic projects together.",
+  description:
+    "A web app to collaborate online and build fantastic projects together.",
 };
 
 export default function RootLayout({
@@ -31,8 +31,8 @@ export default function RootLayout({
           <AppStateProvider>
             <SupabaseUserProvider>
               <SocketProvider>
-              {children}
-              <Toaster/>
+                {children}
+                <Toaster />
               </SocketProvider>
             </SupabaseUserProvider>
           </AppStateProvider>
