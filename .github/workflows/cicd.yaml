@@ -23,6 +23,7 @@ jobs:
           echo "STRIPE_SECRET_KEY=${{secrets.STRIPE_SECRET_KEY}}">> .env
           echo "STRIPE_WEBHOOK_SECRET=${{secrets.STRIPE_WEBHOOK_SECRET}}">> .env
           echo "THOUGHT_STREAM_DB_PWD=${{secrets.THOUGHT_STREAM_DB_PWD}}">> .env
+          cat .env
       - name: Build docker image
         run: docker build -t akashkulkarni4444/thought-stream .
       - name: Login to docker hub
