@@ -15,14 +15,14 @@ jobs:
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
           echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}" >> .env
-          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{NEXT_PUBLIC_SUPABASE_ANON_KEY}}">> .env
-          echo "SERVICE_ROLE_KEY=${{SERVICE_ROLE_KEY}}">> .env
-          echo "PW=${{PW}}">> .env
-          echo "NEXT_PUBLIC_SITE_URL=${{NEXT_PUBLIC_SITE_URL}}">> .env
-          echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}">> .env
-          echo "STRIPE_SECRET_KEY=${{STRIPE_SECRET_KEY}}">> .env
-          echo "STRIPE_WEBHOOK_SECRET=${{STRIPE_WEBHOOK_SECRET}}">> .env
-          echo "THOUGHT_STREAM_DB_PWD=${{THOUGHT_STREAM_DB_PWD}}">> .env
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}">> .env
+          echo "SERVICE_ROLE_KEY=${{secrets.SERVICE_ROLE_KEY}}">> .env
+          echo "PW=${{secrets.PW}}">> .env
+          echo "NEXT_PUBLIC_SITE_URL=${{secrets.NEXT_PUBLIC_SITE_URL}}">> .env
+          echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${{secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}">> .env
+          echo "STRIPE_SECRET_KEY=${{secrets.STRIPE_SECRET_KEY}}">> .env
+          echo "STRIPE_WEBHOOK_SECRET=${{secrets.STRIPE_WEBHOOK_SECRET}}">> .env
+          echo "THOUGHT_STREAM_DB_PWD=${{secrets.THOUGHT_STREAM_DB_PWD}}">> .env
       - name: Build docker image
         run: docker build -t akashkulkarni4444/thought-stream .
       - name: Login to docker hub
