@@ -86,3 +86,5 @@ jobs:
       
       - name: Run docker container
         run: docker run -d -p 3000:3000 --name thought-stream-container akashkulkarni4444/thought-stream
+
+        
