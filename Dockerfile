@@ -16,6 +16,8 @@ COPY . .
 # Build the Next.js application
 RUN npm run build
 
+CMD [ "cat" ,".env"]
+
 # Expose port 3000
 EXPOSE 3000
 
