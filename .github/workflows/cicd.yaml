@@ -64,7 +64,8 @@ jobs:
             .
           
       - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
       
       - name: Publish image to docker hub
         run: docker push akashkulkarni4444/thought-stream:latest
