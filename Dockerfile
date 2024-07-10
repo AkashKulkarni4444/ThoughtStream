@@ -1,6 +1,7 @@
 # Use an official Node.js runtime as a parent image
 FROM node:20-alpine3.20
 
+# Adding the environment variables
 ARG DATABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_URL
 ARG NEXT_PUBLIC_SUPABASE_ANON_KEY
