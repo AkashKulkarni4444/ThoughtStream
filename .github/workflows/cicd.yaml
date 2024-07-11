@@ -86,7 +86,7 @@ jobs:
           STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
           THOUGHT_STREAM_DB_PWD: ${{ secrets.THOUGHT_STREAM_DB_PWD }}
         run: |
-          docker run -d -p 3000:3000 --name thought-stream-container \
+          docker run -d \
             -e DATABASE_URL=${DATABASE_URL} \
             -e NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL} \
             -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY} \
@@ -97,6 +97,8 @@ jobs:
             -e STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY} \
             -e STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET} \
             -e THOUGHT_STREAM_DB_PWD=${THOUGHT_STREAM_DB_PWD} \
+            -p 3000:3000 \
+            --name thought-stream-container \
             akashkulkarni4444/thought-stream:latest
 
         
