@@ -37,31 +37,19 @@ jobs:
       #     echo "THOUGHT_STREAM_DB_PWD=${THOUGHT_STREAM_DB_PWD}" >> .env
 
       - name: Build docker image
-        env: 
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-          SERVICE_ROLE_KEY: ${{ secrets.SERVICE_ROLE_KEY }}
-          PW: ${{ secrets.PW }}
-          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
-          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
-          THOUGHT_STREAM_DB_PWD: ${{ secrets.THOUGHT_STREAM_DB_PWD }}
+        # env: 
+        #   DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        #   NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        #   NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        #   SERVICE_ROLE_KEY: ${{ secrets.SERVICE_ROLE_KEY }}
+        #   PW: ${{ secrets.PW }}
+        #   NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+        #   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+        #   STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+        #   STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+        #   THOUGHT_STREAM_DB_PWD: ${{ secrets.THOUGHT_STREAM_DB_PWD }}
         run: |
-          docker build \
-            -t akashkulkarni4444/thought-stream \
-            --build-arg DATABASE_URL=${DATABASE_URL} \
-            --build-arg NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL} \
-            --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY} \
-            --build-arg SERVICE_ROLE_KEY=${SERVICE_ROLE_KEY} \
-            --build-arg PW=${PW} \
-            --build-arg NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL} \
-            --build-arg NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY} \
-            --build-arg STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY} \
-            --build-arg STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET} \
-            --build-arg THOUGHT_STREAM_DB_PWD=${THOUGHT_STREAM_DB_PWD} \
-            .
+          docker build -t akashkulkarni4444/thought-stream .
           
       - name: Login to docker hub
         run: |
@@ -86,6 +74,29 @@ jobs:
           fi
       
       - name: Run docker container
-        run: docker run -d -p 3000:3000 --name thought-stream-container akashkulkarni4444/thought-stream
+        env: 
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SERVICE_ROLE_KEY: ${{ secrets.SERVICE_ROLE_KEY }}
+          PW: ${{ secrets.PW }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          THOUGHT_STREAM_DB_PWD: ${{ secrets.THOUGHT_STREAM_DB_PWD }}
+        run: |
+          docker run -d -p 3000:3000 --name thought-stream-container \
+            -e DATABASE_URL=${DATABASE_URL} \
+            -e NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL} \
+            -e NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY} \
+            -e SERVICE_ROLE_KEY=${SERVICE_ROLE_KEY} \
+            -e PW=${PW} \
+            -e NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL} \
+            -e NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY} \
+            -e STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY} \
+            -e STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET} \
+            -e THOUGHT_STREAM_DB_PWD=${THOUGHT_STREAM_DB_PWD} \
+            akashkulkarni4444/thought-stream:latest
 
         
