@@ -117,6 +117,19 @@ const Dropdown: React.FC<DropdownProps> = ({ title, id, listType, iconId, childr
         toast({title: 'Success',description: 'Update emoji for the folder',});
       }
     }
+    if (listType === 'file') {
+      const fId = id.split('folder');
+      dispatch({
+        type: 'UPDATE_FILE',
+        payload: { workspaceId, folderId: id, fileId:fId[1],file:{iconId:selectedEmoji}},
+      });
+      const { data, error } = await updateFile({ iconId: selectedEmoji }, fId[1]);
+      if (error) {
+        toast({title: 'Error',variant: 'destructive',description: 'Could not update the emoji for this file.',});
+      } else {
+        toast({title: 'Success',description: 'Update emoji for the File.',});
+      }
+    }
   };
   const folderTitleChange = (e: any) => {
     if (!workspaceId) return;
