@@ -94,16 +94,6 @@ const useSupabaseRealtime = () => {
           }
         }
       )
-      .subscribe();
-
-    return () => {
-      channel.unsubscribe();
-    };
-  }, [supabase, state, selectedWorskpace]);
-
-  useEffect(() => {
-    const channel = supabase
-      .channel("db-changes")
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "folders" },
@@ -175,7 +165,6 @@ const useSupabaseRealtime = () => {
         }
       )
       .subscribe();
-
     return () => {
       channel.unsubscribe();
     };

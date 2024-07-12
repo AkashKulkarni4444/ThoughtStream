@@ -255,7 +255,7 @@ const SettingsForm = () => {
                     <div className="p-4 flex justify-between items-center" key={c.id} >
                       <div className="flex gap-4 items-center">
                         <Avatar>
-                          <AvatarImage src={c.avatarUrl?c.avatarUrl:"/avatars/7.png"}/>
+                          <AvatarImage src={c.avatarUrl?supabase.storage.from('avatars').getPublicUrl(c.avatarUrl).data.publicUrl:"/avatars/7.png"}/>
                           <AvatarFallback>PJ</AvatarFallback>
                         </Avatar>
                         <div className="text-sm  gap-2 text-muted-foreground overflow-hidden overflow-ellipsis sm:w-[300px] w-[140px] ">
@@ -300,7 +300,7 @@ const SettingsForm = () => {
         <Separator />
         <div className="flex items-center">
           <Avatar>
-            <AvatarImage src={userInfo?.avatarUrl?userInfo.avatarUrl:"/avatars/7.png"} />
+            <AvatarImage src={userInfo?.avatarUrl ? supabase.storage.from('avatars').getPublicUrl(userInfo.avatarUrl).data.publicUrl : "/avatars/7.png"} />
             <AvatarFallback>
               <CypressProfileIcon />
             </AvatarFallback>

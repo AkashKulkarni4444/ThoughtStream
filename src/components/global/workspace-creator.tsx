@@ -22,6 +22,7 @@ import CollaboratorSearch from "./collaborator-search";
 import { ScrollArea } from "../ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useToast } from "../ui/use-toast";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const WorkspaceCreator = () => {
   const { user } = useSupabaseUser();
@@ -31,6 +32,7 @@ const WorkspaceCreator = () => {
   const [title, setTitle] = useState("");
   const [collaborators, setCollaborators] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const supabase = createClientComponentClient();
 
   const addCollaborator = (user: User) => {
     setCollaborators([...collaborators, user]);
@@ -133,7 +135,7 @@ const WorkspaceCreator = () => {
                   <div className="p-4 flex justify-between items-center" key={c.id} >
                     <div className="flex gap-4 items-center">
                       <Avatar>
-                        <AvatarImage src={c.avatarUrl?c.avatarUrl:"/avatars/7.png"} />
+                        <AvatarImage src={c.avatarUrl?supabase.storage.from('avatars').getPublicUrl(c.avatarUrl).data.publicUrl:"/avatars/7.png"} />
                         <AvatarFallback>PJ</AvatarFallback>
                       </Avatar>
                       <div className="text-sm gap-2 text-muted-foreground overflow-hidden overflow-ellipsis sm:w-[300px] w-[140px] ">
