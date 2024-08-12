@@ -38,7 +38,9 @@ var TOOLBAR_OPTIONS = [
   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
   [{ font: [] }],
   [{ align: [] }],
-
+  ['link'], // add link option
+  ['image'], // add image option
+  ['video'], // add video option
   ['clean'], // remove formatting button
 ];
 
