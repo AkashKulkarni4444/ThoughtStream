@@ -22,7 +22,7 @@ const LoginPage = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     mode: 'onChange',
     resolver: zodResolver(FormSchema),
-    defaultValues: { email: '', password: '' },
+    defaultValues: { email: 'asktest007@gmail.com', password: 'asktest007' },
   });
 
   const isLoading = form.formState.isSubmitting;
